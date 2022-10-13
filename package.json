@@ -1,0 +1,17 @@
+{
+  "name": "delivery-order",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Личный проект «Keksobooking» от HTML Academy",
+  "devDependencies": {
+    "eslint": "^8.25.0"
+  },
+  "license": "MIT",
+  "scripts": {
+    "test": "eslint js/"
+  },
+  "engines": {
+    "node": "14.x",
+    "npm": "6.x"
+  }
+}
