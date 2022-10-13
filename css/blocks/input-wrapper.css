@@ -150,6 +150,11 @@
   background: var(--color-radio-checked);
 }
 
+.input-wrapper--radio-group input:focus-visible + label {
+  outline: 2px solid var(--color-radio-checked-hover);
+  outline-offset: -2px;
+}
+
 .input-wrapper--radio-group label:active {
   color: var(--color-text-white);
 
