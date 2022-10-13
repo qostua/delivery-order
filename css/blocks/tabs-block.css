@@ -1,0 +1,128 @@
+.tabs-block {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.tabs-block > h2 {
+  width: 100%;
+  margin-bottom: 40px;
+
+  font-weight: 700;
+  font-size: 36px;
+  line-height: 48px;
+}
+
+.tabs-block__pick-up,
+.tabs-block__item-delivery {
+  display: none;
+  transition: opacity 1s var(--transition-base);
+}
+
+#tab-pick-up:checked ~ .tabs-block__content > .tabs-block__pick-up {
+  display: flex;
+  animation-name: fadeOut;
+  animation-duration: 1s;
+  animation-iteration-count: 1;
+}
+
+#tab-delivery:checked ~ .tabs-block__content > .tabs-block__item-delivery {
+  display: flex;
+  animation-name: fadeOut;
+  animation-duration: 1s;
+}
+
+.tabs-block > input {
+  position: absolute;
+
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+
+  clip: rect(0 0 0 0);
+}
+
+.tabs-block > label {
+  width: 368px;
+  margin-right: 32px;
+  padding: 32px 40px 45px 40px;
+
+  border-radius: 4px;
+  outline: none;
+  box-shadow: inset 0 0 0 2px var(--color-light-blue);
+  cursor: pointer;
+
+  transition: box-shadow var(--transition-base),
+  background var(--transition-base);
+}
+
+.tabs-block > label:last-of-type {
+  margin-right: 0;
+}
+
+.tabs-block > label span {
+  display: block;
+  margin-bottom: 27px;
+
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 30px;
+
+  transition: color var(--transition-base);
+}
+
+.tabs-block > label svg {
+  transition: fill var(--transition-base);
+
+  fill: var(--color-light-blue);
+}
+
+.tabs-block > label:hover {
+  box-shadow: inset 0 0 0 2px var(--color-blue);
+}
+
+.tabs-block > label:hover svg {
+  transition: fill var(--transition-base);
+
+  fill: var(--color-blue);
+}
+
+.tabs-block > label:active {
+  background: url("../../img/link-checked.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.tabs-block > label:active span {
+  color: var(--color-text-white);
+}
+
+.tabs-block > label:active svg {
+  fill: var(--color-text-white);
+}
+
+.tabs-block > input:checked + label {
+  background: url("../../img/link-checked.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  box-shadow: none;
+}
+
+.tabs-block > input:checked + label span {
+  color: var(--color-text-white);
+}
+
+.tabs-block > input:checked + label svg {
+  fill: var(--color-text-white);
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
