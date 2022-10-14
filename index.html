@@ -43,7 +43,7 @@
           <div class="tabs-block__content">
             <section class="form tabs-block__pick-up">
               <h2 class="visually-hidden">Форма самовывоза</h2>
-              <form action="#" method="POST">
+              <form action="#" method="POST" autocomplete="off">
                 <h3>Самовывоз</h3>
                 <div class="input-wrapper input-wrapper--radio-group">
                   <h4>Город</h4>
@@ -110,7 +110,7 @@
             </section>
             <section class="form tabs-block__item-delivery">
               <h2 class="visually-hidden">Форма самовывоза</h2>
-              <form action="#" method="POST">
+              <form action="#" method="POST" autocomplete="off">
                 <h3>Доставка</h3>
                 <div class="input-wrapper input-wrapper--radio-group">
                   <h4>Город</h4>
@@ -125,13 +125,13 @@
                 </div>
                 <div class="input-wrapper input-wrapper--error input-wrapper--input">
                   <h4>Адрес</h4>
-                  <input id="delivery-user-adress" type="text" required />
+                  <input id="delivery-user-adress" type="text" required  placeholder="ул. Строителей, дом 20, кв. 22"/>
                   <label for="delivery-user-adress" aria-label="Укажите адрес"></label>
                   <div class="input-wrapper__error">Укажите адрес</div>
                 </div>
                 <div class="input-wrapper input-wrapper--success input-wrapper--input">
                   <h4>Дата доставки</h4>
-                  <input id="delivery-user-date-delivery" type="text" required />
+                  <input id="delivery-user-date-delivery" type="text" required placeholder="12/12/2022"/>
                   <label for="delivery-user-date-delivery" aria-label="Укажите дату доставки"></label>
                   <div class="input-wrapper__error">Укажите дату доставки</div>
                 </div>
@@ -199,6 +199,7 @@
         </div>
       </main>
     </div>
-    <script src="js/main.js" type="module"></script>
+    <script src="./js/libs/imask.js"></script>
+    <script src="./js/main.js" type="module"></script>
   </body>
 </html>
