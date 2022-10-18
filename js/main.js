@@ -1,2 +1,3 @@
 import './keyboard-control.js';
-import './inputs.js'
+import './inputs.js';
+
