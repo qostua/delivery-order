@@ -125,13 +125,13 @@
                 </div>
                 <div class="input-wrapper input-wrapper--error input-wrapper--input">
                   <h4>Адрес</h4>
-                  <input id="delivery-user-adress" type="text" required  placeholder="ул. Строителей, дом 20, кв. 22"/>
-                  <label for="delivery-user-adress" aria-label="Укажите адрес"></label>
-                  <div class="input-wrapper__error">Укажите адрес</div>
-                </div>
-                <div class="input-wrapper input-wrapper--success input-wrapper--input">
+                  <input id="delivery-user-adress" type="text" required  placeholder="ул. Строителей, дом 20, кв. 22" data-submit-help="адрес" />
+                  <label for="delivery-user-adress" aria-label="Укажите адрес доставки"></label>
+                  <div class="input-wrapper__error">Укажите адрес доставки</div>
+                </fieldset>
+                <fieldset class="input-wrapper input-wrapper--input">
                   <h4>Дата доставки</h4>
-                  <input id="delivery-user-date-delivery" type="text" required placeholder="12/12/2022"/>
+                  <input id="delivery-user-date-delivery" data-input-type="date" type="text" required placeholder="12/12/2022"/>
                   <label for="delivery-user-date-delivery" aria-label="Укажите дату доставки"></label>
                   <div class="input-wrapper__error">Укажите дату доставки</div>
                 </div>
@@ -159,7 +159,7 @@
                   </div>
                 </div>
                 <h3>Способ оплаты</h3>
-                <div class="input-wrapper input-wrapper--radio-group input-wrapper--payment-method">
+                <fieldset class="input-wrapper input-wrapper--radio-group input-wrapper--payment-method">
                   <input id="delivery-card" type="radio" name="payment-method" value="card" />
                   <label for="delivery-card">Карта</label>
                   <input id="delivery-cash" type="radio" name="payment-method" value="cash" checked />
@@ -181,8 +181,8 @@
                   <h4>Номер телефона</h4>
                   <input id="delivery-user-phone" data-input-type="tel" type="tel" placeholder="+7 (" pattern="\+?[78]?[ (-]*\d{3}[ )-]*\d{3}([ -]*\d{2}){2}" required data-submit-help="телефон" />
                   <label for="delivery-user-phone" aria-label="Укажите телефон"></label>
-                  <div class="input-wrapper__error">Укажите телефон</div>
-                </div>
+                  <div class="input-wrapper__error">Введите номер телефона, он должен начинаться с +7</div>
+                </fieldset>
                 <span class="form__info">Курьер позвонит на указанный номер за час до доставки заказа.</span>
                 <div class="form__submit-block">
                   <button class="form__submit-btn" type="submit">Заказать</button>
