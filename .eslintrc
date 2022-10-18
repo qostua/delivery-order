@@ -9,9 +9,7 @@ env:
   browser: true
 
 globals:
-  _: readonly
-  L: readonly
-  noUiSlider: readonly
+  IMask: readonly
 
 extends:
   "htmlacademy/vanilla"
