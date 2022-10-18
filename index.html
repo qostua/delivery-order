@@ -91,7 +91,7 @@
                 </div>
                 <div class="input-wrapper input-wrapper--input">
                   <h4>Номер телефона</h4>
-                  <input id="pick-up-user-phone" type="text" placeholder="+7 (" required/>
+                  <input id="pick-up-user-phone" data-input-type="tel" type="tel" placeholder="+7 (" pattern="\+?[78]?[ (-]*\d{3}[ )-]*\d{3}([ -]*\d{2}){2}" required />
                   <label for="pick-up-user-phone" aria-label="Укажите телефон"></label>
                   <div class="input-wrapper__error">Укажите телефон</div>
                 </div>
@@ -179,7 +179,7 @@
                 </div>
                 <div class="input-wrapper input-wrapper--input">
                   <h4>Номер телефона</h4>
-                  <input id="delivery-user-phone" type="text" placeholder="+7 (" required />
+                  <input id="delivery-user-phone" data-input-type="tel" type="tel" placeholder="+7 (" pattern="\+?[78]?[ (-]*\d{3}[ )-]*\d{3}([ -]*\d{2}){2}" required data-submit-help="телефон" />
                   <label for="delivery-user-phone" aria-label="Укажите телефон"></label>
                   <div class="input-wrapper__error">Укажите телефон</div>
                 </div>
