@@ -3,7 +3,9 @@
 
   display: flex;
   flex-wrap: wrap;
-  margin-bottom: 24px;
+  margin: 0 0 24px 0;
+  padding: 0;
+  border: 0;
 }
 
 .input-wrapper--success.input-wrapper--input input,

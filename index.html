@@ -45,7 +45,7 @@
               <h2 class="visually-hidden">Форма самовывоза</h2>
               <form class="form-order" action="https://echo.htmlacademy.ru/courses" method="POST" autocomplete="off">
                 <h3>Самовывоз</h3>
-                <div class="input-wrapper input-wrapper--radio-group">
+                <fieldset class="input-wrapper input-wrapper--radio-group">
                   <h4>Город</h4>
                   <input id="pick-up-led" type="radio" name="city" value="lED" checked />
                   <label for="pick-up-led">Санкт-Петербург</label>
@@ -55,8 +55,8 @@
                   <label for="pick-up-goj">Нижний Новгород</label>
                   <input id="pick-up-krr" type="radio" name="city" value="krr" />
                   <label for="pick-up-krr">Краснодар</label>
-                </div>
-                <div class="input-wrapper input-wrapper--radio-group">
+                </fieldset>
+                <fieldset class="input-wrapper input-wrapper--radio-group">
                   <h4>Адрес пункта выдачи заказов</h4>
                   <input id="pick-up-led-address-1" type="radio" name="led-address" value="Ленина, 10" checked />
                   <label for="pick-up-led-address-1">Ленина, 10</label>
@@ -68,18 +68,18 @@
                   <label for="pick-up-led-address-4">Брежнева, 40</label>
                   <input id="pick-up-led-address-5" type="radio" name="led-address" value="Андропова, 50" />
                   <label for="pick-up-led-address-5">Андропова, 50</label>
-                </div>
+                </fieldset>
                 <div class="map"></div>
                 <h3>Способ оплаты</h3>
-                <div class="input-wrapper input-wrapper--radio-group input-wrapper--payment-method">
+                <fieldset class="input-wrapper input-wrapper--radio-group input-wrapper--payment-method">
                   <input id="pick-up-card" type="radio" name="payment-method" value="card" checked />
                   <label for="pick-up-card">Карта</label>
                   <input id="pick-up-cash" type="radio" name="payment-method" value="cash" />
                   <label for="pick-up-cash">Наличные курьеру</label>
-                </div>
-                <div class="input-wrapper input-wrapper--error input-wrapper--input-group">
+                </fieldset>
+                <fieldset class="input-wrapper input-wrapper--input-group input-wrapper--user-card" data-submit-help="номер карты">
                   <h4>Номер карты</h4>
-                  <input id="pick-up-user-card-1-4" type="text" required />
+                  <input id="pick-up-user-card-1-4" data-input-type="card" type="text" maxlength="4" minlength="4" pattern="\d{4}" required />
                   <label for="pick-up-user-card-1-4" aria-label="Первые четыре цифр с карты"></label>
                   <input id="pick-up-user-card-5-8" data-input-type="card" type="text" maxlength="4" minlength="4" pattern="\d{4}" required />
                   <label for="pick-up-user-card-5-8" aria-label="Вторые четыре цифр с карты"></label>
@@ -88,13 +88,13 @@
                   <input id="pick-up-user-card-13-16" data-input-type="card" type="text" maxlength="4" minlength="4" pattern="\d{4}" required />
                   <label for="pick-up-user-card-13-16" aria-label="Четвёртые четыре цифр с карты"></label>
                   <div class="input-wrapper__error">Введите верный номер карты</div>
-                </div>
-                <div class="input-wrapper input-wrapper--input">
+                </fieldset>
+                <fieldset class="input-wrapper input-wrapper--input" data-submit-help="телефон" >
                   <h4>Номер телефона</h4>
                   <input id="pick-up-user-phone" data-input-type="tel" type="tel" placeholder="+7 (" pattern="\+?[78]?[ (-]*\d{3}[ )-]*\d{3}([ -]*\d{2}){2}" required />
                   <label for="pick-up-user-phone" aria-label="Укажите телефон"></label>
-                  <div class="input-wrapper__error">Укажите телефон</div>
-                </div>
+                  <div class="input-wrapper__error">Введите номер телефона, он должен начинаться с +7</div>
+                </fieldset>
                 <span class="form__info" >Товар на складе будет привязан к номеру телефона. В пункте выдачи назовите номер телефона, чтобы получить
                   ваш заказ.</span>
                 <div class="form__submit-block">
@@ -112,7 +112,7 @@
               <h2 class="visually-hidden">Форма самовывоза</h2>
               <form class="form-order" action="https://echo.htmlacademy.ru/courses" method="POST" autocomplete="off">
                 <h3>Доставка</h3>
-                <div class="input-wrapper input-wrapper--radio-group">
+                <fieldset class="input-wrapper input-wrapper--radio-group">
                   <h4>Город</h4>
                   <input id="delivery-led" type="radio" name="city" value="lED" checked />
                   <label for="delivery-led">Санкт-Петербург</label>
@@ -122,8 +122,8 @@
                   <label for="delivery-goj">Нижний Новгород</label>
                   <input id="delivery-krr" type="radio" name="city" value="krr" />
                   <label for="delivery-krr">Краснодар</label>
-                </div>
-                <div class="input-wrapper input-wrapper--error input-wrapper--input">
+                </fieldset>
+                <fieldset class="input-wrapper input-wrapper--input">
                   <h4>Адрес</h4>
                   <input id="delivery-user-adress" type="text" required  placeholder="ул. Строителей, дом 20, кв. 22" data-submit-help="адрес" />
                   <label for="delivery-user-adress" aria-label="Укажите адрес доставки"></label>
@@ -133,9 +133,9 @@
                   <h4>Дата доставки</h4>
                   <input id="delivery-user-date-delivery" data-input-type="date" type="text" required placeholder="12/12/2022"/>
                   <label for="delivery-user-date-delivery" aria-label="Укажите дату доставки"></label>
-                  <div class="input-wrapper__error">Укажите дату доставки</div>
-                </div>
-                <div class="input-wrapper input-wrapper--range">
+                  <div class="input-wrapper__error">Укажите корректную дату доставки</div>
+                </fieldset>
+                <fieldset class="input-wrapper input-wrapper--range">
                   <h4>Время доставки</h4>
                   <input id="delivery-user-time-delivery" type="range" class="hidden" data-field-type="delivery" />
                   <label for="delivery-user-time-delivery" aria-label="Укажите время доставки"></label>
@@ -157,15 +157,15 @@
                       <div class="range-slider-tip">19:00</div>
                     </div>
                   </div>
-                </div>
+                </fieldset>
                 <h3>Способ оплаты</h3>
                 <fieldset class="input-wrapper input-wrapper--radio-group input-wrapper--payment-method">
                   <input id="delivery-card" type="radio" name="payment-method" value="card" />
                   <label for="delivery-card">Карта</label>
                   <input id="delivery-cash" type="radio" name="payment-method" value="cash" checked />
                   <label for="delivery-cash">Наличные курьеру</label>
-                </div>
-                <div class="input-wrapper input-wrapper--hidden input-wrapper--input-group">
+                </fieldset>
+                <fieldset class="input-wrapper input-wrapper--hidden input-wrapper--input-group input-wrapper--user-card" disabled data-submit-help="номер карты" >
                   <h4>Номер карты</h4>
                   <input id="delivery-user-card-1-4" data-input-type="card" type="text" maxlength="4" minlength="4" pattern="\d{4}" required />
                   <label for="delivery-user-card-1-4" aria-label="Первые четыре цифр с карты"></label>
@@ -176,8 +176,8 @@
                   <input id="delivery-user-card-13-16" data-input-type="card" type="text" maxlength="4" minlength="4" pattern="\d{4}"  required />
                   <label for="delivery-user-card-13-16" aria-label="Четвёртые четыре цифр с карты"></label>
                   <div class="input-wrapper__error">Введите верный номер карты</div>
-                </div>
-                <div class="input-wrapper input-wrapper--input">
+                </fieldset>
+                <fieldset class="input-wrapper input-wrapper--input">
                   <h4>Номер телефона</h4>
                   <input id="delivery-user-phone" data-input-type="tel" type="tel" placeholder="+7 (" pattern="\+?[78]?[ (-]*\d{3}[ )-]*\d{3}([ -]*\d{2}){2}" required data-submit-help="телефон" />
                   <label for="delivery-user-phone" aria-label="Укажите телефон"></label>
