@@ -1,11 +1,13 @@
 import {
   isFormValidity,
-  isCardNumberCorrect,
-  setCardInputValidity,
   setInputFieldsetValidity
 } from './validation.js';
+import {
+  setCardInput,
+  setCardKeydown,
+  toggleCardInputVisable
+} from "./card.js";
 
-const CARD_INPUT_MASK = '0000';
 const PHONE_INPUT_MASK = '+{7} (000) 000-00-00';
 const DATE_INPUT_MASK = 'd/`m/`y';
 const DATE_INPUT_MASK_BLOCKS = {
@@ -13,11 +15,9 @@ const DATE_INPUT_MASK_BLOCKS = {
   m: {mask: IMask.MaskedRange, placeholderChar: 'М', from: 1, to: 12, maxLength: 2},
   y: {mask: IMask.MaskedRange, placeholderChar: 'Г', from: 1900, to: 2999, maxLength: 4},
 };
-const CARD_LENGTH = 16;
 
 const formsOrder = document.querySelectorAll('.form-order');
 const dateInputs = document.querySelectorAll('[data-input-type="date"]');
-const cardInputs = document.querySelectorAll('[data-input-type="card"]');
 const phoneInputs = document.querySelectorAll('[data-input-type="tel"]');
 const cardInputFieldsets = document.querySelectorAll('.input-wrapper--user-card');
 
@@ -28,11 +28,7 @@ dateInputs.forEach((input) => {
     lazy: true,
   });
 });
-cardInputs.forEach((input) => {
-  IMask(input, {
-    mask: CARD_INPUT_MASK,
-  });
-});
+
 phoneInputs.forEach((input) => {
   IMask(input, {
     mask: PHONE_INPUT_MASK,
@@ -46,14 +42,11 @@ const toggleBtnSubmit = (form, isTurnOn = true) => {
     submit.disabled = !isTurnOn;
   }
 };
-const getCardNumber = (form) => {
-  const inputs = form.querySelectorAll('[data-input-type="card"]');
-  return Array.from(inputs).reduce((previousValue, field) => previousValue + field.value, '');
-};
 const getSubmitHelpValues = (form) => {
   const submitHelpValues = new Set();
 
   const invalidInputs = form.querySelectorAll('input:invalid');
+  console.log(invalidInputs)
   invalidInputs.forEach((input) => {
     const helpValue = input.closest('fieldset').dataset.submitHelp;
     if (helpValue) {
@@ -104,17 +97,19 @@ const setFormInput = (form) => {
     showSubmitHelpValues(form);
   });
 };
-const setCardInput = (cardFieldset) => {
-  cardFieldset.addEventListener('input', () => {
-    const number = getCardNumber(cardFieldset);
-    const isNumberCorrect = number.length === CARD_LENGTH && isCardNumberCorrect(number);
-    setCardInputValidity(cardFieldset, isNumberCorrect);
-  });
+const setPaymentMethodChange = (form) => {
+  const paymentMethodFieldset = form.querySelector('.input-wrapper--payment-method');
+  paymentMethodFieldset.addEventListener('input', (evt) => {
+    const isCard = evt.target.value === 'card';
+    toggleCardInputVisable(form, isCard);
+  })
 };
 
 formsOrder.forEach((form) => {
   setFormInput(form);
   toggleBtnSubmit(form, false);
   showSubmitHelpValues(form);
+  setPaymentMethodChange(form);
 });
 cardInputFieldsets.forEach((fieldset) => setCardInput(fieldset));
+cardInputFieldsets.forEach((fieldset) => setCardKeydown(fieldset));

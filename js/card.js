@@ -50,8 +50,20 @@ const setCardKeydown = (cardFieldset) => {
     }
   });
 };
+const toggleCardInputVisable = (form, isVisable = true) => {
+  const cardInput = form.querySelector('.input-wrapper--user-card');
+
+  if (isVisable) {
+    cardInput.classList.remove('input-wrapper--hidden');
+    cardInput.disabled = false;
+  } else {
+    cardInput.classList.add('input-wrapper--hidden');
+    cardInput.disabled = true;
+  }
+};
 
 export {
   setCardInput,
-  setCardKeydown
+  setCardKeydown,
+  toggleCardInputVisable
 };
