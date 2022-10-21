@@ -6,7 +6,11 @@ import {
   setCardInput,
   setCardKeydown,
   toggleCardInputVisable
-} from "./card.js";
+} from './card.js';
+import {
+  setRangeTimeSliderMove,
+  setRangeTimeSliderFocus
+} from './time-choosing.js';
 
 const PHONE_INPUT_MASK = '+{7} (000) 000-00-00';
 const DATE_INPUT_MASK = 'd/`m/`y';
@@ -20,6 +24,7 @@ const formsOrder = document.querySelectorAll('.form-order');
 const dateInputs = document.querySelectorAll('[data-input-type="date"]');
 const phoneInputs = document.querySelectorAll('[data-input-type="tel"]');
 const cardInputFieldsets = document.querySelectorAll('.input-wrapper--user-card');
+const rangeTimeSliders = document.querySelectorAll('.js_range-slider-thumb-area');
 
 dateInputs.forEach((input) => {
   IMask(input, {
@@ -46,7 +51,6 @@ const getSubmitHelpValues = (form) => {
   const submitHelpValues = new Set();
 
   const invalidInputs = form.querySelectorAll('input:invalid');
-  console.log(invalidInputs)
   invalidInputs.forEach((input) => {
     const helpValue = input.closest('fieldset').dataset.submitHelp;
     if (helpValue) {
@@ -111,5 +115,13 @@ formsOrder.forEach((form) => {
   showSubmitHelpValues(form);
   setPaymentMethodChange(form);
 });
-cardInputFieldsets.forEach((fieldset) => setCardInput(fieldset));
-cardInputFieldsets.forEach((fieldset) => setCardKeydown(fieldset));
+
+cardInputFieldsets.forEach((fieldset) => {
+  setCardInput(fieldset);
+  setCardKeydown(fieldset);
+});
+
+rangeTimeSliders.forEach((slider) => {
+  setRangeTimeSliderMove(slider);
+  setRangeTimeSliderFocus(slider);
+});
