@@ -33,5 +33,9 @@
   --color-btn-active:           #b5d1ff;
   --color-btn-disabled:         #e2e2e2;
 
+  --color-selector-base:        #67a0f6;
+  --color-selector-hover:       #b5d1ff;
+  --color-selector-active:      #397de1;
+
   --transition-base:            0.15s ease-in-out;
 }
