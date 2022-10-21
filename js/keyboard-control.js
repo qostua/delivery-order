@@ -1,8 +1,8 @@
 const tabPickUp = document.querySelector('#tab-pick-up');
 const tabDelivery = document.querySelector('#tab-delivery');
 
-const changeTabFormHandler = (evt) => {
-  if (evt.key !== 'ArrowRight' && evt.key !== 'ArrowLeft') {
+const changeTabFormHandler = (event) => {
+  if (event.key !== 'ArrowRight' && event.key !== 'ArrowLeft') {
     return;
   }
 

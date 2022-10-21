@@ -1,7 +1,7 @@
 import {
   isCardNumberCorrect,
   setCardInputValidity
-} from "./validation.js";
+} from './validation.js';
 
 const CARD_INPUT_MASK = '0000';
 const CARD_NUMBER_LENGTH = 16;
@@ -26,7 +26,7 @@ const setCardFocus = (cardFieldset) => {
   if (focusInput.value.length === CARD_INPUT_MAX_LENGTH && nextInput) {
     nextInput.focus();
   }
-}
+};
 const setCardInput = (cardFieldset) => {
   cardFieldset.addEventListener('input', () => {
     const number = getCardNumber(cardFieldset);
@@ -36,8 +36,8 @@ const setCardInput = (cardFieldset) => {
   });
 };
 const setCardKeydown = (cardFieldset) => {
-  cardFieldset.addEventListener('keydown', (evt) => {
-    if (evt.key !== 'Backspace' || evt.target.value.length !== 0) {
+  cardFieldset.addEventListener('keydown', (event) => {
+    if (event.key !== 'Backspace' || event.target.value.length !== 0) {
       return;
     }
 

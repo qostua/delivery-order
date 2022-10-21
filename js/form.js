@@ -90,8 +90,8 @@ const showSubmitHelpValues = (form) => {
 };
 
 const setFormInput = (form) => {
-  form.addEventListener('input', (evt) => {
-    setInputFieldsetValidity(evt.target, evt.target.validity.valid);
+  form.addEventListener('input', (event) => {
+    setInputFieldsetValidity(event.target, event.target.validity.valid);
 
     toggleBtnSubmit(form, isFormValidity(form));
     showSubmitHelpValues(form);
@@ -99,10 +99,10 @@ const setFormInput = (form) => {
 };
 const setPaymentMethodChange = (form) => {
   const paymentMethodFieldset = form.querySelector('.input-wrapper--payment-method');
-  paymentMethodFieldset.addEventListener('input', (evt) => {
-    const isCard = evt.target.value === 'card';
+  paymentMethodFieldset.addEventListener('input', (event) => {
+    const isCard = event.target.value === 'card';
     toggleCardInputVisable(form, isCard);
-  })
+  });
 };
 
 formsOrder.forEach((form) => {
