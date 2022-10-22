@@ -1,44 +1,30 @@
 import {
   isFormValidity,
-  setInputFieldsetValidity
+  showInputFieldsetValidity
 } from './validation.js';
 import {
   setCardInput,
   setCardKeydown,
   toggleCardInputVisable
-} from './card.js';
+} from './input-card.js';
 import {
   setRangeTimeSliderMove,
   setRangeTimeSliderFocus
-} from './time-choosing.js';
-
-const PHONE_INPUT_MASK = '+{7} (000) 000-00-00';
-const DATE_INPUT_MASK = 'd/`m/`y';
-const DATE_INPUT_MASK_BLOCKS = {
-  d: {mask: IMask.MaskedRange, placeholderChar: 'Д', from: 1, to: 31, maxLength: 2},
-  m: {mask: IMask.MaskedRange, placeholderChar: 'М', from: 1, to: 12, maxLength: 2},
-  y: {mask: IMask.MaskedRange, placeholderChar: 'Г', from: 1900, to: 2999, maxLength: 4},
-};
+} from './time-slider.js';
+import {
+  setDateDeliveryInput,
+  showCorrectDateRange
+} from './input-date.js';
+import {
+  setPhoneInputMask,
+  setDateInputMask
+} from './input-mask.js';
 
 const formsOrder = document.querySelectorAll('.form-order');
 const dateInputs = document.querySelectorAll('[data-input-type="date"]');
 const phoneInputs = document.querySelectorAll('[data-input-type="tel"]');
 const cardInputFieldsets = document.querySelectorAll('.input-wrapper--user-card');
 const rangeTimeSliders = document.querySelectorAll('.js_range-slider-thumb-area');
-
-dateInputs.forEach((input) => {
-  IMask(input, {
-    mask: DATE_INPUT_MASK,
-    blocks: DATE_INPUT_MASK_BLOCKS,
-    lazy: true,
-  });
-});
-
-phoneInputs.forEach((input) => {
-  IMask(input, {
-    mask: PHONE_INPUT_MASK,
-  });
-});
 
 const toggleBtnSubmit = (form, isTurnOn = true) => {
   const submit = form.querySelector('.form__submit-btn');
@@ -95,7 +81,7 @@ const showSubmitHelpValues = (form) => {
 
 const setFormInput = (form) => {
   form.addEventListener('input', (event) => {
-    setInputFieldsetValidity(event.target, event.target.validity.valid);
+    showInputFieldsetValidity(event.target);
 
     toggleBtnSubmit(form, isFormValidity(form));
     showSubmitHelpValues(form);
@@ -103,11 +89,15 @@ const setFormInput = (form) => {
 };
 const setPaymentMethodChange = (form) => {
   const paymentMethodFieldset = form.querySelector('.input-wrapper--payment-method');
+  if (!paymentMethodFieldset) {
+    return;
+  }
   paymentMethodFieldset.addEventListener('input', (event) => {
     const isCard = event.target.value === 'card';
     toggleCardInputVisable(form, isCard);
   });
 };
+
 
 formsOrder.forEach((form) => {
   setFormInput(form);
@@ -124,4 +114,14 @@ cardInputFieldsets.forEach((fieldset) => {
 rangeTimeSliders.forEach((slider) => {
   setRangeTimeSliderMove(slider);
   setRangeTimeSliderFocus(slider);
+});
+
+phoneInputs.forEach((input) => {
+  setPhoneInputMask(input);
+});
+
+dateInputs.forEach((input) => {
+  showCorrectDateRange(input);
+  setDateDeliveryInput(input);
+  setDateInputMask(input);
 });
