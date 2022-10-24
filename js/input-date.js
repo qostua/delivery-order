@@ -1,7 +1,7 @@
 import {
   isInputDeliveryDateCorrect,
   showInputFieldsetValidity
-} from './validation';
+} from './validation.js';
 import {
   getDateString
 } from './utils.js';
