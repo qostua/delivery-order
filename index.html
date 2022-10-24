@@ -97,13 +97,13 @@
                 <fieldset class="input-wrapper input-wrapper--city-delivery input-wrapper--radio-group">
                   <h4>Город</h4>
                 </fieldset>
-                <fieldset class="input-wrapper input-wrapper--input">
+                <fieldset class="input-wrapper input-wrapper--input" data-submit-help="адрес" >
                   <h4>Адрес</h4>
-                  <input id="delivery-user-adress" type="text" required  placeholder="ул. Строителей, дом 20, кв. 22" data-submit-help="адрес" />
+                  <input id="delivery-user-adress" type="text" required  placeholder="ул. Строителей, дом 20, кв. 22" />
                   <label for="delivery-user-adress" aria-label="Укажите адрес доставки"></label>
                   <div class="input-wrapper__error">Укажите адрес доставки</div>
                 </fieldset>
-                <fieldset class="input-wrapper input-wrapper--input">
+                <fieldset class="input-wrapper input-wrapper--input" data-submit-help="дата" >
                   <h4>Дата доставки</h4>
                   <input id="delivery-user-date-delivery" data-input-type="date" type="text" required placeholder="12/12/2022"/>
                   <label for="delivery-user-date-delivery" aria-label="Укажите дату доставки"></label>
@@ -151,9 +151,9 @@
                   <label for="delivery-user-card-13-16" aria-label="Четвёртые четыре цифр с карты"></label>
                   <div class="input-wrapper__error">Введите верный номер карты</div>
                 </fieldset>
-                <fieldset class="input-wrapper input-wrapper--input">
+                <fieldset class="input-wrapper input-wrapper--input" data-submit-help="телефон" >
                   <h4>Номер телефона</h4>
-                  <input id="delivery-user-phone" data-input-type="tel" type="tel" placeholder="+7 (" pattern="\+?[78]?[ (-]*\d{3}[ )-]*\d{3}([ -]*\d{2}){2}" required data-submit-help="телефон" />
+                  <input id="delivery-user-phone" data-input-type="tel" type="tel" placeholder="+7 (" pattern="\+?[78]?[ (-]*\d{3}[ )-]*\d{3}([ -]*\d{2}){2}" required />
                   <label for="delivery-user-phone" aria-label="Укажите телефон"></label>
                   <div class="input-wrapper__error">Введите номер телефона, он должен начинаться с +7</div>
                 </fieldset>
