@@ -1,11 +1,8 @@
 import './keyboard-control.js';
 import './form.js';
-import './api.js';
 import {
   renderCityInputsLists,
-  generateCityInputsList,
   renderAddressInputsList,
-  generateAddressInputsList,
   setCityInput
 } from './input-address.js';
 import {
@@ -14,10 +11,10 @@ import {
 
 getData(
   (data) => {
-    renderCityInputsLists(generateCityInputsList(data));
-    renderAddressInputsList(generateAddressInputsList(data));
+    renderCityInputsLists(data);
+    renderAddressInputsList(data);
     setCityInput(
-      () => renderAddressInputsList(generateAddressInputsList(data))
+      () => renderAddressInputsList(data)
     );
   }
 );
