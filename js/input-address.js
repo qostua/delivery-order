@@ -79,6 +79,19 @@ const generateAddressInput = (order, adress) => {
   inputAndLabel.append(input, label);
   return inputAndLabel;
 };
+const getDeliveryPointsData = (data) => {
+  const cityId = getCheckedPickUpCityId();
+  const cityData = data.cities.find((city) => city['city-id'] === cityId);
+  console.log(cityData['delivery-points'])
+  return cityData['delivery-points'];
+};
+const getCheckedAddressData = (data) => {
+  const deliveryPointsData = getDeliveryPointsData(data);
+  const checkedAddressInputValue = inputWrapperLedAddress.querySelector(':checked').value;
+  console.log(checkedAddressInputValue)
+
+  return deliveryPointsData.find((point) => point.address === checkedAddressInputValue);
+};
 const generateAddressInputsList = (data) => {
   const cityId = getCheckedPickUpCityId();
   const cityData = data.cities.find((city) => city['city-id'] === cityId);
