@@ -119,8 +119,17 @@ const setCityInput = (cb) => {
   });
 };
 
+const setAddressInput = (cb) => {
+  inputWrapperLedAddress.addEventListener('input', () => {
+    cb();
+  });
+};
+
 export {
+  getDeliveryPointsData,
   renderCityInputsLists,
   renderAddressInputsList,
-  setCityInput
+  getCheckedAddressData,
+  setCityInput,
+  setAddressInput
 };
