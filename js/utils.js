@@ -24,8 +24,62 @@ const getDateString = (date) => {
   return `${day}/${month}/${year}`;
 };
 
+const showAlert = (alertText) => {
+  const alert = document.createElement('div');
+  alert.style.padding = '10px';
+  alert.style.width = '100%';
+  alert.style.backgroundColor = '#ff9081';
+  alert.style.position = 'absolute';
+  alert.style.top = '0';
+  alert.style.display = 'flex';
+  alert.style.justifyContent = 'center';
+  alert.style.alignItems = 'center';
+  alert.style.cursor = 'pointer';
+  alert.style.userSelect = 'none';
+  alert.style.color = '#ffffff';
+
+  const text = document.createElement('p');
+  text.textContent = alertText;
+  text.style.color = '#ffffff';
+  text.style.fontWeight = '500';
+  text.style.fontSize = '18px';
+
+  const closeBth = document.createElement('button');
+  closeBth.textContent = 'Закрыть';
+  closeBth.style.border = 'none';
+  closeBth.style.background = 'none';
+  closeBth.style.color = 'inherit';
+  closeBth.style.fontWeight = '700';
+  closeBth.style.fontSize = '15px';
+  closeBth.style.position = 'absolute';
+  closeBth.style.right = '10px';
+
+  alert.append(text, closeBth);
+  document.body.append(alert);
+
+  const handleKeypress = (evt) => {
+    if (evt.key === 'Escape') {
+      alert.remove();
+      document.removeEventListener('keydown', handleKeypress);
+    }
+  };
+
+  document.addEventListener('keydown', handleKeypress);
+  alert.addEventListener('click', () => {
+    alert.remove();
+    document.removeEventListener('keydown', handleKeypress);
+  });
+  alert.addEventListener('mouseover', () => {
+    alert.style.color = '#FFFFFFB3';
+  });
+  alert.addEventListener('mouseout', () => {
+    alert.style.color = '#ffffff';
+  });
+};
+
 export {
   setCursorStyle,
   preventSelection,
-  getDateString
+  getDateString,
+  showAlert
 };
