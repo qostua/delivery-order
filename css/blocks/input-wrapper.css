@@ -122,6 +122,10 @@
   border: 2px solid var(--color-input-border-focus);
 }
 
+.input-wrapper--radio-group {
+  gap: 6px 3px;
+}
+
 .input-wrapper--radio-group input {
   position: absolute;
 
@@ -133,7 +137,8 @@
 }
 
 .input-wrapper--radio-group label {
-  margin-right: 3px;
+  border-radius: 22px;
+
   padding: 12px 24px;
 
   background: var(--color-radio-base);
@@ -161,16 +166,6 @@
   color: var(--color-text-white);
 
   background: var(--color-radio-checked-hover);
-}
-
-.input-wrapper--radio-group label:first-of-type {
-  border-radius: 22px 0 0 22px;
-}
-
-.input-wrapper--radio-group label:last-of-type {
-  margin-right: 0;
-
-  border-radius: 0 22px 22px 0;
 }
 
 .input-wrapper--hidden {
