@@ -51,7 +51,7 @@
                 <fieldset class="input-wrapper input-wrapper--led-address input-wrapper--radio-group">
                   <h4>Адрес пункта выдачи заказов</h4>
                 </fieldset>
-                <div class="map"></div>
+                <div class="map" id="map-canvas"></div>
                 <h3>Способ оплаты</h3>
                 <fieldset class="input-wrapper input-wrapper--radio-group input-wrapper--payment-method">
                   <input id="pick-up-card" type="radio" name="payment-method" value="card" checked />
@@ -173,7 +173,9 @@
         </div>
       </main>
     </div>
-    <script src="./js/libs/imask.js"></script>
+    <script src="libs/imask.js"></script>
+    <script src="libs/leaflet/leaflet.js"></script>
     <script src="./js/main.js" type="module"></script>
+    <link rel="stylesheet" href="libs/leaflet/leaflet.css">
   </body>
 </html>
