@@ -10,6 +10,7 @@ env:
 
 globals:
   IMask: readonly
+  L: readonly
 
 extends:
   "htmlacademy/vanilla"

@@ -2,7 +2,7 @@ const DEFAULT_CITY = 'Санкт-Петербург';
 const CityInputTypes = {
   PICK_UP: true,
   DELIVERY: false,
-}
+};
 
 const inputWrapperLedAddress = document.querySelector('.input-wrapper--led-address');
 const inputCityPickUpWrapper = document.querySelector('.input-wrapper--city-pick-up');
@@ -30,16 +30,14 @@ const generateCityInput = (cityId, cityName, isPickUpInputs = true) => {
   inputAndLabel.append(input, label);
   return inputAndLabel;
 };
-const generateCityInputsList = (data, isPickUpInputs = true) => {
-  return data.cities.map((city) => generateCityInput(city['city-id'], city.city, isPickUpInputs))
-};
+const generateCityInputsList = (data, isPickUpInputs = true) => data.cities.map((city) => generateCityInput(city['city-id'], city.city, isPickUpInputs));
 const cleanCityInputsWraps = () => {
   const fieldsPickUp = inputCityPickUpWrapper.querySelectorAll('input, label');
   const fieldsCityDelivery = inputCityDeliveryWrapper.querySelectorAll('input, label');
 
   fieldsPickUp.forEach((field) => field.remove());
   fieldsCityDelivery.forEach((field) => field.remove());
-}
+};
 const renderCityInputsLists = (data) => {
   const cityInputsPickUp = generateCityInputsList(data, CityInputTypes.PICK_UP);
   const cityInputsDelivery = generateCityInputsList(data, CityInputTypes.DELIVERY);
@@ -55,9 +53,7 @@ const renderCityInputsLists = (data) => {
   inputCityDeliveryWrapper.append(fieldsetDelivery);
 };
 
-const getCheckedPickUpCityId = () => {
-  return inputCityPickUpWrapper.querySelector(':checked').value;
-};
+const getCheckedPickUpCityId = () => inputCityPickUpWrapper.querySelector(':checked').value;
 const generateAddressInput = (order, adress) => {
   const inputAndLabel = document.createDocumentFragment();
 
@@ -82,13 +78,11 @@ const generateAddressInput = (order, adress) => {
 const getDeliveryPointsData = (data) => {
   const cityId = getCheckedPickUpCityId();
   const cityData = data.cities.find((city) => city['city-id'] === cityId);
-  console.log(cityData['delivery-points'])
   return cityData['delivery-points'];
 };
 const getCheckedAddressData = (data) => {
   const deliveryPointsData = getDeliveryPointsData(data);
   const checkedAddressInputValue = inputWrapperLedAddress.querySelector(':checked').value;
-  console.log(checkedAddressInputValue)
 
   return deliveryPointsData.find((point) => point.address === checkedAddressInputValue);
 };
@@ -101,7 +95,7 @@ const cleanAddressInputsWrap = () => {
   const fields = inputWrapperLedAddress.querySelectorAll('input, label');
 
   fields.forEach((field) => field.remove());
-}
+};
 const renderAddressInputsList = (data) => {
   const addressInputs = generateAddressInputsList(data);
   const fieldset = document.createDocumentFragment();

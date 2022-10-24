@@ -83,9 +83,9 @@ const setPositionMap = (selectedAddressData, isAnimate = true) => {
     },
     MAP_START_ZOOM_SETTING,
     {
-      "animate": isAnimate,
-      "pan": {
-        "duration": 1,
+      'animate': isAnimate,
+      'pan': {
+        'duration': 1,
       },
     }
   );
@@ -99,7 +99,7 @@ const activeMarker = (selectedAddressData, isAnimate) => {
       marker.setIcon(activePinIcon);
     }
   });
-}
+};
 
 export {
   getMap,

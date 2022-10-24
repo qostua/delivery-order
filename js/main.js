@@ -20,7 +20,7 @@ import {
 const MapOptions = {
   ANIMATE_MAP: true,
   STATIC_MAP: false,
-}
+};
 
 getMap(
   () => getData(
@@ -40,9 +40,9 @@ getMap(
         () => {
           activeMarker(getCheckedAddressData(data), MapOptions.ANIMATE_MAP);
         }
-      )
+      );
     }
   )
-)
+);
 
 
