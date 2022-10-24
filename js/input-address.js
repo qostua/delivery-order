@@ -93,9 +93,7 @@ const getCheckedAddressData = (data) => {
   return deliveryPointsData.find((point) => point.address === checkedAddressInputValue);
 };
 const generateAddressInputsList = (data) => {
-  const cityId = getCheckedPickUpCityId();
-  const cityData = data.cities.find((city) => city['city-id'] === cityId);
-  const deliveryPointsData = cityData['delivery-points'];
+  const deliveryPointsData = getDeliveryPointsData(data);
 
   return deliveryPointsData.map((deliveryPoint, order) => generateAddressInput(order, deliveryPoint.address));
 };
