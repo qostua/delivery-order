@@ -78,11 +78,28 @@ const showSubmitHelpValues = (form) => {
 
   submitHelp.innerHTML = generateHelpValuesString(submitHelpValues, sizeHelpValues);
 };
+const setSameValueSyncInputs = (changeInput) => {
+  const inputValue = changeInput.value;
+  const typeSyncInput = changeInput.dataset.inputType;
+  const syncInputs = document.querySelectorAll(`[data-input-type=${typeSyncInput}][data-sync='true']:not(:focus)`)
+
+  syncInputs.forEach((input) => {
+    input.mask.value = inputValue;
+    const form = input.closest('form');
+
+    toggleBtnSubmit(form, isFormValidity(form));
+    showSubmitHelpValues(form);
+    showInputFieldsetValidity(input);
+  });
+}
 
 const setFormInput = (form) => {
   form.addEventListener('input', (event) => {
-    showInputFieldsetValidity(event.target);
+    if (event.target.dataset.sync) {
+      setSameValueSyncInputs(event.target);
+    }
 
+    showInputFieldsetValidity(event.target);
     toggleBtnSubmit(form, isFormValidity(form));
     showSubmitHelpValues(form);
   });
@@ -98,28 +115,23 @@ const setPaymentMethodChange = (form) => {
   });
 };
 
-
 formsOrder.forEach((form) => {
   setFormInput(form);
   toggleBtnSubmit(form, false);
   showSubmitHelpValues(form);
   setPaymentMethodChange(form);
 });
-
 cardInputFieldsets.forEach((fieldset) => {
   setCardInput(fieldset);
   setCardKeydown(fieldset);
 });
-
 rangeTimeSliders.forEach((slider) => {
   setRangeTimeSliderMove(slider);
   setRangeTimeSliderFocus(slider);
 });
-
 phoneInputs.forEach((input) => {
   setPhoneInputMask(input);
 });
-
 dateInputs.forEach((input) => {
   showCorrectDateRange(input);
   setDateDeliveryInput(input);
