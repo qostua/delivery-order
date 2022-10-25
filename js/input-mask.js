@@ -7,12 +7,12 @@ const DATE_INPUT_MASK_BLOCKS = {
 };
 
 const setPhoneInputMask = (input) => {
-  IMask(input, {
+  input.mask = IMask(input, {
     mask: PHONE_INPUT_MASK,
   });
 };
 const setDateInputMask = (input) => {
-  IMask(input, {
+  input.mask = IMask(input, {
     mask: DATE_INPUT_MASK,
     blocks: DATE_INPUT_MASK_BLOCKS,
     lazy: true,
