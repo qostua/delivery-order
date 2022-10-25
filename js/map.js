@@ -95,6 +95,7 @@ const activeMarker = (selectedAddressData, isAnimate) => {
   setPositionMap(selectedAddressData, isAnimate);
 
   layerMarkers.eachLayer((marker) => {
+    marker.setIcon(pinIcon);
     if (marker.options.address === selectedAddressData.address) {
       marker.setIcon(activePinIcon);
     }
