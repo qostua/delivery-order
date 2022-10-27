@@ -1,28 +1,35 @@
 import {
   isFormValidity,
-  showInputFieldsetValidity
+  showInputFieldsetValidity,
+  resetInputFieldsetValidity
 } from './validation.js';
 import {
+  toggleCardInputVisible,
   setCardInput,
-  setCardKeydown,
-  toggleCardInputVisable
+  setCardKeydown
 } from './input-card.js';
 import {
-  setRangeTimeSliderMove,
-  setRangeTimeSliderFocus
+  setTimeSliderMove,
+  setTimeSliderFocus,
+  resetSlider
 } from './time-slider.js';
 import {
-  setDateDeliveryInput,
-  showCorrectDateRange
+  showCorrectDateRange,
+  setDateDeliveryInput
 } from './input-date.js';
 import {
-  setPhoneInputMask,
-  setDateInputMask
-} from './input-mask.js';
+  sendData
+} from './api.js';
+import './input-mask.js';
+
+const SubmitState = {
+  TURN_ON: true,
+  TURN_OFF: false,
+};
 
 const formsOrder = document.querySelectorAll('.form-order');
 const dateInputs = document.querySelectorAll('[data-input-type="date"]');
-const phoneInputs = document.querySelectorAll('[data-input-type="tel"]');
+const paymentMethodFieldsets = document.querySelectorAll('.input-wrapper--payment-method');
 const cardInputFieldsets = document.querySelectorAll('.input-wrapper--user-card');
 const rangeTimeSliders = document.querySelectorAll('.js_range-slider-thumb-area');
 
@@ -32,6 +39,11 @@ const toggleBtnSubmit = (form, isTurnOn = true) => {
   if (submit) {
     submit.disabled = !isTurnOn;
   }
+};
+const toggleBtnSubmitFormsOrder = (isTurnOn = SubmitState.TURN_ON) => {
+  formsOrder.forEach((form) => {
+    toggleBtnSubmit(form, isTurnOn);
+  });
 };
 const getSubmitHelpValues = (form) => {
   const submitHelpValues = new Set();
@@ -81,7 +93,7 @@ const showSubmitHelpValues = (form) => {
 const setSameValueSyncInputs = (changeInput) => {
   const inputValue = changeInput.value;
   const typeSyncInput = changeInput.dataset.inputType;
-  const syncInputs = document.querySelectorAll(`[data-input-type=${typeSyncInput}][data-sync='true']:not(:focus)`)
+  const syncInputs = document.querySelectorAll(`[data-input-type=${typeSyncInput}][data-sync='true']:not(:focus)`);
 
   syncInputs.forEach((input) => {
     input.mask.value = inputValue;
@@ -91,7 +103,28 @@ const setSameValueSyncInputs = (changeInput) => {
     showSubmitHelpValues(form);
     showInputFieldsetValidity(input);
   });
-}
+};
+const resetFormsOrder = () => {
+  formsOrder.forEach((form) => {
+    form.reset();
+    const inputs = form.querySelectorAll('input');
+    const sliders = form.querySelectorAll('.js_range-slider-thumb-area');
+
+    inputs.forEach((input) => {
+      if (input.mask) {
+        input.mask.updateValue();
+      }
+      resetInputFieldsetValidity(input);
+      if (input.type === 'hidden') {
+        input.value = '';
+      }
+    });
+    sliders.forEach((slider) => resetSlider(slider));
+
+    toggleCardInputVisible(form, true);
+    showSubmitHelpValues(form);
+  });
+};
 
 const setFormInput = (form) => {
   form.addEventListener('input', (event) => {
@@ -104,14 +137,27 @@ const setFormInput = (form) => {
     showSubmitHelpValues(form);
   });
 };
-const setPaymentMethodChange = (form) => {
-  const paymentMethodFieldset = form.querySelector('.input-wrapper--payment-method');
-  if (!paymentMethodFieldset) {
-    return;
-  }
-  paymentMethodFieldset.addEventListener('input', (event) => {
-    const isCard = event.target.value === 'card';
-    toggleCardInputVisable(form, isCard);
+const setPaymentMethodChange = (fieldset) => {
+  const form = fieldset.closest('form');
+
+  fieldset.addEventListener('input', (event) => {
+    const isCard = (event.target.value === 'card');
+    toggleCardInputVisible(form, isCard);
+  });
+};
+
+const setFormsSubmit = (onSuccess, onError) => {
+  formsOrder.forEach((form) => {
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      toggleBtnSubmit(event.target,false);
+
+      sendData(
+        () => onSuccess(),
+        () => onError(),
+        new FormData(event.target)
+      );
+    });
   });
 };
 
@@ -119,21 +165,29 @@ formsOrder.forEach((form) => {
   setFormInput(form);
   toggleBtnSubmit(form, false);
   showSubmitHelpValues(form);
-  setPaymentMethodChange(form);
+});
+paymentMethodFieldsets.forEach((fieldset) => {
+  setPaymentMethodChange(fieldset);
 });
 cardInputFieldsets.forEach((fieldset) => {
   setCardInput(fieldset);
   setCardKeydown(fieldset);
 });
 rangeTimeSliders.forEach((slider) => {
-  setRangeTimeSliderMove(slider);
-  setRangeTimeSliderFocus(slider);
-});
-phoneInputs.forEach((input) => {
-  setPhoneInputMask(input);
+  const sliderWrap = slider.closest('fieldset');
+  const sliderOutputField = sliderWrap.querySelector('input[type="hidden"]');
+
+  setTimeSliderMove(slider, sliderOutputField);
+  setTimeSliderFocus(slider, sliderOutputField);
 });
 dateInputs.forEach((input) => {
   showCorrectDateRange(input);
   setDateDeliveryInput(input);
-  setDateInputMask(input);
 });
+
+export {
+  setFormsSubmit,
+  resetFormsOrder,
+  toggleBtnSubmitFormsOrder,
+  SubmitState
+};
