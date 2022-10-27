@@ -1,12 +1,9 @@
-import {
-  showAlert
-} from './utils.js';
-
 const Url = {
   DATA: 'https://fake-json-shop-heroku.herokuapp.com/db',
+  SERVER: 'https://fake-json-shop-heroku.herokuapp.com/requests',
 };
 
-const getData = (onSuccess) => {
+const getData = (onSuccess, onFail) => {
   fetch(Url.DATA)
     .then((response) => {
       if (!response.ok) {
@@ -18,10 +15,31 @@ const getData = (onSuccess) => {
       onSuccess(data);
     })
     .catch(() => {
-      showAlert('Не удалось получить данные с сервера. Проверьте подключение и перезагрузите страницу.');
+      onFail();
+    });
+};
+const sendData = (onSuccess, onFail, body) => {
+  fetch(
+    Url.SERVER,
+    {
+      method: 'POST',
+      body,
+    },
+  )
+    .then((response) => {
+      if (response.ok) {
+        onSuccess();
+      } else {
+        onFail();
+      }
+    })
+    .catch(() => {
+      onFail();
     });
 };
 
+
 export {
-  getData
+  getData,
+  sendData
 };
