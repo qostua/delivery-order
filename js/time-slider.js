@@ -9,23 +9,23 @@ const PERIOD_DURATION = '02:00';
 const SLIDER_STEP_DURATION = '00:20';
 
 const TimeSettings = {
-  MINUTE_IN_HOUR: 60,
-  TIME_FORMATE: 24,
+  MINUTES_IN_HOUR: 60,
+  TIME_FORMAT: 24,
   TIME_VALUE_LENGTH: 2,
 };
 
 const getMinutesDurationFromTime = (time = '00:00') => {
   const [hours, minutes] = time.split(':');
-  return Number(hours) * TimeSettings.MINUTE_IN_HOUR + Number(minutes);
+  return Number(hours) * TimeSettings.MINUTES_IN_HOUR + Number(minutes);
 };
 const getTimeFromMinutesDuration = (minutesDuration) => {
-  const hours = Math.floor(minutesDuration / TimeSettings.MINUTE_IN_HOUR) % TimeSettings.TIME_FORMATE;
-  const minutes = minutesDuration % TimeSettings.MINUTE_IN_HOUR;
+  const hours = Math.floor(minutesDuration / TimeSettings.MINUTES_IN_HOUR) % TimeSettings.TIME_FORMAT;
+  const minutes = minutesDuration % TimeSettings.MINUTES_IN_HOUR;
 
-  const hoursFormated = String(hours).padStart(TimeSettings.TIME_VALUE_LENGTH, '0');
-  const minutesFormated = String(minutes).padStart(TimeSettings.TIME_VALUE_LENGTH, '0');
+  const hoursFormatted = String(hours).padStart(TimeSettings.TIME_VALUE_LENGTH, '0');
+  const minutesFormatted = String(minutes).padStart(TimeSettings.TIME_VALUE_LENGTH, '0');
 
-  return `${hoursFormated}:${minutesFormated}`;
+  return `${hoursFormatted}:${minutesFormatted}`;
 };
 const getPeriodFromSliderStep = (step) => {
   const startPeriodMinutesDuration = getMinutesDurationFromTime(START_ORDER_TIME) + step * getMinutesDurationFromTime(SLIDER_STEP_DURATION);
@@ -33,12 +33,15 @@ const getPeriodFromSliderStep = (step) => {
 
   return `${getTimeFromMinutesDuration(startPeriodMinutesDuration)} - ${getTimeFromMinutesDuration(endPeriodMinutesDuration)}`;
 };
-const setPeriodTimeSlider = (slider, period) => {
+const setPeriodTimeSlider = (slider, period, outputField) => {
   const periodWrap = slider.querySelector('.range-slider-tooltip');
 
   periodWrap.textContent = period;
+  if (outputField) {
+    outputField.value = period;
+  }
 };
-const setSliderThumbPosition = (slider, leftPosition, freeAreaSliderWidth) => {
+const setSliderThumbPosition = (slider, leftPosition, freeAreaSliderWidth, outputField) => {
   const sliderThumb = slider.querySelector('.js_range-slider-thumb');
   sliderThumb.style.left = `${leftPosition}px`;
 
@@ -48,11 +51,24 @@ const setSliderThumbPosition = (slider, leftPosition, freeAreaSliderWidth) => {
   if (!currentStep || String(step) !== currentStep) {
     sliderThumb.dataset.step = String(step);
     const period = getPeriodFromSliderStep(step);
+    setPeriodTimeSlider(slider, period, outputField);
+  }
+};
+const resetSlider = (slider) => {
+  const sliderThumb = slider.querySelector('.js_range-slider-thumb');
+  sliderThumb.style.left = '0';
+
+  const step = 0;
+  const currentStep = sliderThumb.dataset.step;
+
+  if (!currentStep || String(step) !== currentStep) {
+    sliderThumb.dataset.step = String(step);
+    const period = getPeriodFromSliderStep(step);
     setPeriodTimeSlider(slider, period);
   }
 };
 
-const setRangeTimeSliderMove = (slider) => {
+const setTimeSliderMove = (slider, outputField) => {
   const sliderThumb = slider.querySelector('.js_range-slider-thumb');
 
   const getLeftPositionThumb = (currentX, startClickX, startLeftPositionThumb, freeAreaSliderWidth) => {
@@ -76,7 +92,7 @@ const setRangeTimeSliderMove = (slider) => {
     const mouseMoveHandler = (moveEvent) => {
       const leftPosition = getLeftPositionThumb(moveEvent.clientX, startClientX, startLeftPosition, freeAreaSliderWidth);
 
-      setSliderThumbPosition(slider, leftPosition, freeAreaSliderWidth);
+      setSliderThumbPosition(slider, leftPosition, freeAreaSliderWidth, outputField);
     };
 
     document.addEventListener('mousemove', mouseMoveHandler);
@@ -92,7 +108,7 @@ const setRangeTimeSliderMove = (slider) => {
     event.preventDefault();
   });
 };
-const setRangeTimeSliderFocus = (slider) => {
+const setTimeSliderFocus = (slider, outputField) => {
   const sliderThumb = slider.querySelector('.js_range-slider-thumb');
 
   const getLeftPositionThumb = (startLeftPositionThumb, freeAreaSliderWidth, isRight = true) => {
@@ -118,7 +134,7 @@ const setRangeTimeSliderFocus = (slider) => {
 
     const leftPosition = getLeftPositionThumb(startLeftPosition, freeAreaSliderWidth, event.key === 'ArrowRight');
 
-    setSliderThumbPosition(slider, leftPosition, freeAreaSliderWidth);
+    setSliderThumbPosition(slider, leftPosition, freeAreaSliderWidth, outputField);
   };
 
   sliderThumb.addEventListener('focusin', () => {
@@ -130,6 +146,7 @@ const setRangeTimeSliderFocus = (slider) => {
 };
 
 export {
-  setRangeTimeSliderMove,
-  setRangeTimeSliderFocus
+  setTimeSliderMove,
+  setTimeSliderFocus,
+  resetSlider
 };
