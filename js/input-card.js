@@ -50,16 +50,23 @@ const setCardKeydown = (cardFieldset) => {
     }
   });
 };
-const toggleCardInputVisable = (form, isVisable = true) => {
-  const cardInput = form.querySelector('.input-wrapper--user-card');
-
-  if (isVisable) {
-    cardInput.classList.remove('input-wrapper--hidden');
-    cardInput.disabled = false;
-  } else {
-    cardInput.classList.add('input-wrapper--hidden');
-    cardInput.disabled = true;
+const toggleCardInputVisible = (form, isVisible = true) => {
+  const fieldset = form.querySelector('.input-wrapper--user-card');
+  if (!fieldset) {
+    return;
   }
+  const inputs = fieldset.querySelectorAll('input');
+
+  if (isVisible) {
+    fieldset.classList.remove('input-wrapper--hidden');
+  } else {
+    fieldset.classList.add('input-wrapper--hidden');
+  }
+
+  fieldset.disabled = !isVisible;
+  inputs.forEach((input) => {
+    input.disabled = !isVisible;
+  });
 };
 
 export {
