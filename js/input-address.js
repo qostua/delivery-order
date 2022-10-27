@@ -1,4 +1,5 @@
-const DEFAULT_CITY = 'Санкт-Петербург';
+const DEFAULT_CITY_ID = 'led';
+
 const CityInputTypes = {
   PICK_UP: true,
   DELIVERY: false,
@@ -20,8 +21,8 @@ const generateCityInput = (cityId, cityName, isPickUpInputs = true) => {
   input.name = 'city';
   input.value = cityId;
 
-  if (cityName === DEFAULT_CITY) {
-    input.checked = true;
+  if (cityId === DEFAULT_CITY_ID) {
+    input.setAttribute('checked', '');
   }
 
   label.htmlFor = input.id;
@@ -66,7 +67,7 @@ const generateAddressInput = (order, adress) => {
   input.value = adress;
 
   if (order === 0) {
-    input.checked = true;
+    input.setAttribute('checked', '');
   }
 
   label.htmlFor = input.id;
@@ -110,7 +111,6 @@ const setCityInput = (cb) => {
     cb();
   });
 };
-
 const setAddressInput = (cb) => {
   inputWrapperLedAddress.addEventListener('input', () => {
     cb();
@@ -118,9 +118,9 @@ const setAddressInput = (cb) => {
 };
 
 export {
-  getDeliveryPointsData,
   renderCityInputsLists,
   renderAddressInputsList,
+  getDeliveryPointsData,
   getCheckedAddressData,
   setCityInput,
   setAddressInput

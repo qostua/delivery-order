@@ -1,26 +1,31 @@
-import './keyboard-control.js';
-import './form.js';
 import {
-  getDeliveryPointsData,
-  renderCityInputsLists,
-  renderAddressInputsList,
-  setCityInput,
-  setAddressInput,
-  getCheckedAddressData
-} from './input-address.js';
+  getMap,
+  renderMarkers,
+  activeMarker,
+  AnimationState
+} from './map.js';
 import {
   getData
 } from './api.js';
 import {
-  getMap,
-  renderMarkers,
-  activeMarker
-} from './map.js';
-
-const MapOptions = {
-  ANIMATE_MAP: true,
-  STATIC_MAP: false,
-};
+  renderCityInputsLists,
+  renderAddressInputsList,
+  getDeliveryPointsData,
+  getCheckedAddressData,
+  setCityInput,
+  setAddressInput
+} from './input-address.js';
+import {
+  setFormsSubmit,
+  resetFormsOrder,
+  toggleBtnSubmitFormsOrder,
+  SubmitState
+} from './form.js';
+import {
+  showAlert,
+  AlertColor
+} from './utils.js';
+import './keyboard-control.js';
 
 getMap(
   () => getData(
@@ -28,21 +33,33 @@ getMap(
       renderCityInputsLists(data);
       renderAddressInputsList(data);
       renderMarkers(getDeliveryPointsData(data));
-      activeMarker(getCheckedAddressData(data), MapOptions.STATIC_MAP);
+      activeMarker(getCheckedAddressData(data), AnimationState.STATIC);
       setCityInput(
         () => {
           renderAddressInputsList(data);
           renderMarkers(getDeliveryPointsData(data));
-          activeMarker(getCheckedAddressData(data), MapOptions.STATIC_MAP);
+          activeMarker(getCheckedAddressData(data), AnimationState.STATIC);
         }
       );
       setAddressInput(
         () => {
-          activeMarker(getCheckedAddressData(data), MapOptions.ANIMATE_MAP);
+          activeMarker(getCheckedAddressData(data), AnimationState.ANIMATE);
         }
       );
-    }
+      setFormsSubmit(
+        () => {
+          showAlert('Заказ успешно оформлен.', AlertColor.SUCCESS_ALERT);
+          resetFormsOrder();
+          renderAddressInputsList(data);
+          renderMarkers(getDeliveryPointsData(data));
+          activeMarker(getCheckedAddressData(data), AnimationState.STATIC);
+        },
+        () => {
+          showAlert('Ошибка оформления заказа. Попробуйте снова.', AlertColor.FAIL_ALERT);
+          toggleBtnSubmitFormsOrder(SubmitState.TURN_ON);
+        }
+      );
+    },
+    () => showAlert('Не удалось получить данные с сервера. Проверьте подключение и перезагрузите страницу.', AlertColor.FAIL_ALERT)
   )
 );
-
-

@@ -1,4 +1,10 @@
 const DATE_LENGTH = 2;
+const ALERT_DURATION = 5000;
+
+const AlertColor = {
+  SUCCESS_ALERT: '#48ca55',
+  FAIL_ALERT: '#ff9081',
+};
 
 const setCursorStyle = (cursorStyle = 'auto') => {
   if (cursorStyle === 'auto') {
@@ -24,12 +30,13 @@ const getDateString = (date) => {
   return `${day}/${month}/${year}`;
 };
 
-const showAlert = (alertText) => {
+const showAlert = (alertText, alertColor = 'red') => {
   const alert = document.createElement('div');
   alert.style.padding = '10px';
   alert.style.width = '100%';
-  alert.style.backgroundColor = '#ff9081';
-  alert.style.position = 'absolute';
+  alert.style.backgroundColor = alertColor;
+  alert.style.position = 'fixed';
+  alert.style.zIndex = '1000';
   alert.style.top = '0';
   alert.style.display = 'flex';
   alert.style.justifyContent = 'center';
@@ -41,6 +48,8 @@ const showAlert = (alertText) => {
   const text = document.createElement('p');
   text.textContent = alertText;
   text.style.color = '#ffffff';
+  text.style.width = 'calc(100% - 170px)';
+  text.style.textAlign = 'center';
   text.style.fontWeight = '500';
   text.style.fontSize = '18px';
 
@@ -53,21 +62,15 @@ const showAlert = (alertText) => {
   closeBth.style.fontSize = '15px';
   closeBth.style.position = 'absolute';
   closeBth.style.right = '10px';
+  closeBth.style.cursor = 'inherit';
 
   alert.append(text, closeBth);
   document.body.append(alert);
 
-  const handleKeypress = (evt) => {
-    if (evt.key === 'Escape') {
-      alert.remove();
-      document.removeEventListener('keydown', handleKeypress);
-    }
-  };
+  setTimeout(() => alert.remove(), ALERT_DURATION);
 
-  document.addEventListener('keydown', handleKeypress);
   alert.addEventListener('click', () => {
     alert.remove();
-    document.removeEventListener('keydown', handleKeypress);
   });
   alert.addEventListener('mouseover', () => {
     alert.style.color = '#FFFFFFB3';
@@ -81,5 +84,6 @@ export {
   setCursorStyle,
   preventSelection,
   getDateString,
-  showAlert
+  showAlert,
+  AlertColor
 };

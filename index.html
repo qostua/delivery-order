@@ -43,7 +43,7 @@
           <div class="tabs-block__content">
             <section class="form tabs-block__pick-up">
               <h2 class="visually-hidden">Форма самовывоза</h2>
-              <form class="form-order" action="https://echo.htmlacademy.ru/courses" method="POST" autocomplete="off">
+              <form class="form-order" action="https://fake-json-shop-heroku.herokuapp.com/requests" method="post" autocomplete="off">
                 <h3>Самовывоз</h3>
                 <fieldset class="input-wrapper input-wrapper--city-pick-up input-wrapper--radio-group">
                   <h4>Город</h4>
@@ -61,6 +61,7 @@
                 </fieldset>
                 <fieldset class="input-wrapper input-wrapper--input-group input-wrapper--user-card" data-submit-help="номер карты">
                   <h4>Номер карты</h4>
+                  <input id="pick-up-card-total" name="card" type="hidden">
                   <input id="pick-up-user-card-1-4" data-input-type="card" type="text" maxlength="4" minlength="4" pattern="\d{4}" required />
                   <label for="pick-up-user-card-1-4" aria-label="Первые четыре цифр с карты"></label>
                   <input id="pick-up-user-card-5-8" data-input-type="card" type="text" maxlength="4" minlength="4" pattern="\d{4}" required />
@@ -73,7 +74,7 @@
                 </fieldset>
                 <fieldset class="input-wrapper input-wrapper--input" data-submit-help="телефон" >
                   <h4>Номер телефона</h4>
-                  <input id="pick-up-user-phone" data-sync="true" data-input-type="tel" type="tel" placeholder="+7 (" pattern="\+?[78]?[ (-]*\d{3}[ )-]*\d{3}([ -]*\d{2}){2}" required />
+                  <input id="pick-up-user-phone" name="phone" data-sync="true" data-input-type="tel" type="tel" placeholder="+7 (" pattern="\+?[78]?[ (-]*\d{3}[ )-]*\d{3}([ -]*\d{2}){2}" required />
                   <label for="pick-up-user-phone" aria-label="Укажите телефон"></label>
                   <div class="input-wrapper__error">Введите номер телефона, он должен начинаться с +7</div>
                 </fieldset>
@@ -92,26 +93,26 @@
             </section>
             <section class="form tabs-block__item-delivery">
               <h2 class="visually-hidden">Форма самовывоза</h2>
-              <form class="form-order" action="https://echo.htmlacademy.ru/courses" method="POST" autocomplete="off">
+              <form class="form-order" action="https://fake-json-shop-heroku.herokuapp.com/requests" method="post" autocomplete="off">
                 <h3>Доставка</h3>
                 <fieldset class="input-wrapper input-wrapper--city-delivery input-wrapper--radio-group">
                   <h4>Город</h4>
                 </fieldset>
                 <fieldset class="input-wrapper input-wrapper--input" data-submit-help="адрес" >
                   <h4>Адрес</h4>
-                  <input id="delivery-user-adress" type="text" required  placeholder="ул. Строителей, дом 20, кв. 22" />
+                  <input id="delivery-user-adress" name="address" type="text" required  placeholder="ул. Строителей, дом 20, кв. 22" />
                   <label for="delivery-user-adress" aria-label="Укажите адрес доставки"></label>
                   <div class="input-wrapper__error">Укажите адрес доставки</div>
                 </fieldset>
                 <fieldset class="input-wrapper input-wrapper--input" data-submit-help="дата" >
                   <h4>Дата доставки</h4>
-                  <input id="delivery-user-date-delivery" data-input-type="date" type="text" required placeholder="12/12/2022"/>
+                  <input id="delivery-user-date-delivery" name="date" data-input-type="date" type="text" required placeholder="12/12/2022"/>
                   <label for="delivery-user-date-delivery" aria-label="Укажите дату доставки"></label>
                   <div class="input-wrapper__error">Укажите корректную дату доставки</div>
                 </fieldset>
                 <fieldset class="input-wrapper input-wrapper--range">
                   <h4>Время доставки</h4>
-                  <input id="delivery-user-time-delivery" type="range" class="hidden" data-field-type="delivery" />
+                  <input id="delivery-user-time-delivery" name="range" value="10:00 - 12:00" type="hidden" />
                   <label for="delivery-user-time-delivery" aria-label="Укажите время доставки"></label>
                   <div class="range-slider">
                     <div class="range-slider-thumb-area js_range-slider-thumb-area">
@@ -141,6 +142,7 @@
                 </fieldset>
                 <fieldset class="input-wrapper input-wrapper--input-group input-wrapper--user-card" data-submit-help="номер карты" >
                   <h4>Номер карты</h4>
+                  <input id="delivery-card-total" name="card" type="hidden">
                   <input id="delivery-user-card-1-4" data-input-type="card" type="text" maxlength="4" minlength="4" pattern="\d{4}" required />
                   <label for="delivery-user-card-1-4" aria-label="Первые четыре цифр с карты"></label>
                   <input id="delivery-user-card-5-8" data-input-type="card" type="text" maxlength="4" minlength="4" pattern="\d{4}" required />
@@ -153,7 +155,7 @@
                 </fieldset>
                 <fieldset class="input-wrapper input-wrapper--input" data-submit-help="телефон" >
                   <h4>Номер телефона</h4>
-                  <input id="delivery-user-phone" data-sync="true" data-input-type="tel" type="tel" placeholder="+7 (" pattern="\+?[78]?[ (-]*\d{3}[ )-]*\d{3}([ -]*\d{2}){2}" required />
+                  <input id="delivery-user-phone" name="phone" data-sync="true" data-input-type="tel" type="tel" placeholder="+7 (" pattern="\+?[78]?[ (-]*\d{3}[ )-]*\d{3}([ -]*\d{2}){2}" required />
                   <label for="delivery-user-phone" aria-label="Укажите телефон"></label>
                   <div class="input-wrapper__error">Введите номер телефона, он должен начинаться с +7</div>
                 </fieldset>

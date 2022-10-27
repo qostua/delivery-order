@@ -8,6 +8,11 @@ const MAP_MAX_ZOOM_SETTING = 19;
 const MAP_TILE_LAYER_URL = 'https://tile.openstreetmap.org/{z}/{x}/{y}.png';
 const MAP_TILE_LAYER_COPYRIGHT = '&copy;<a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>';
 
+const AnimationState = {
+  ANIMATE: true,
+  STATIC: false,
+};
+
 const activePinIconOptions = {
   iconUrl: 'img/pin-current.png',
   iconSize: [28, 44],
@@ -91,7 +96,7 @@ const setPositionMap = (selectedAddressData, isAnimate = true) => {
   );
 };
 
-const activeMarker = (selectedAddressData, isAnimate) => {
+const activeMarker = (selectedAddressData, isAnimate = AnimationState.STATIC) => {
   setPositionMap(selectedAddressData, isAnimate);
 
   layerMarkers.eachLayer((marker) => {
@@ -105,5 +110,6 @@ const activeMarker = (selectedAddressData, isAnimate) => {
 export {
   getMap,
   renderMarkers,
-  activeMarker
+  activeMarker,
+  AnimationState
 };

@@ -15,7 +15,7 @@ dateInputs.forEach((input) => {
 });
 
 const isFormValidity = (form) => {
-  const inputs = form.querySelectorAll('[required]');
+  const inputs = form.querySelectorAll('[required]:not([disabled])');
 
   return Array.from(inputs).every((input) => input.validity.valid);
 };
@@ -36,7 +36,7 @@ const isCardNumberCorrect = (cardNumber) => {
 
   return (sum % 10) === 0;
 };
-const setCardInputValidity = (cardFieldset, isValid = false) => {
+const setCardFieldsetValidity = (cardFieldset, isValid = false) => {
   const inputs = cardFieldset.querySelectorAll('[data-input-type="card"]');
   const customValidity = (isValid) ? '' : 'Номер карты неверен';
 
@@ -48,6 +48,11 @@ const showInputFieldsetValidity = (input) => {
 
   inputFieldset.classList.remove('input-wrapper--error', 'input-wrapper--success');
   inputFieldset.classList.add(validityClass);
+};
+const resetInputFieldsetValidity = (input) => {
+  const inputFieldset = input.closest('fieldset');
+
+  inputFieldset.classList.remove('input-wrapper--error', 'input-wrapper--success');
 };
 const isInputDeliveryDateCorrect = (inputDateString = '01/01/1000') => {
   const [inputDay, inputMonth, inputYear] = inputDateString.split('/');
@@ -74,7 +79,8 @@ const isInputDeliveryDateCorrect = (inputDateString = '01/01/1000') => {
 export {
   isFormValidity,
   isCardNumberCorrect,
-  setCardInputValidity,
+  setCardFieldsetValidity,
   showInputFieldsetValidity,
+  resetInputFieldsetValidity,
   isInputDeliveryDateCorrect
 };
