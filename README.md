@@ -4,7 +4,7 @@
 
 **project tegs**: `JavaScript`, `Custom Validation`, `Custom Slider`, `Fetch API`, `Interactive Map`, `Leaflet lib`
 
-![Интерфейс сайта](https://user-images.githubusercontent.com/79047487/198239073-24d612b7-d522-4453-821e-4ab97aeb280f.png)
+![Интерфейс сайта](https://user-images.githubusercontent.com/79047487/198351414-01a71fb9-b54e-48a2-a24d-4fb1dad73e47.png)
 
 В этом проекте я запрограммировал страницу заказа доставки в интернет-магазине. Страница позволяет выбрать вид доставки (самовывоз или курьерская доставка по погоду), город, адрес, дату и время доставки, выбрать способ оплаты, ввести данные заказчика (номер телефона и карты).
 
